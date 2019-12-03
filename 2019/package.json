@@ -6,7 +6,8 @@
   "scripts": {
     "run-day": "babel-node --extensions .ts",
     "day1": "yarn run-day ./day1.ts",
-    "day2": "yarn run-day ./day2.ts"
+    "day2": "yarn run-day ./day2.ts",
+    "day3": "yarn run-day ./day3.ts"
   },
   "dependencies": {
     "chalk": "^3.0.0"
