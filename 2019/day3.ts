@@ -57,8 +57,7 @@ const part1 = Math.min(
   ...intersectingKeys.map((val) => {
     return val
       .split(',')
-      .map((x) => +x)
-      .map(Math.abs)
+      .map((x) => Math.abs(+x))
       .reduce((x, y) => x + y);
   })
 );
