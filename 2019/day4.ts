@@ -27,10 +27,12 @@ const rule2 = rule2Matcher.test.bind(rule2Matcher);
 // that's at exactly size 2.
 const rule3 = (x: string) => x.split(/((\d)\2*)/g).some((y) => y.length == 2);
 
-const data = range(rangeHigh - rangeLow + 1).map((x) => x + rangeLow).map((x) => x.toString());
+const data = range(rangeHigh - rangeLow + 1)
+  .map((x) => x + rangeLow)
+  .map((x) => x.toString());
 
 const part1Data = data.filter(rule1).filter(rule2);
 const part2Data = part1Data.filter(rule3);
 
-console.log(`${chalk.green('Part 1:')} %d`, part1Data.length);
-console.log(`${chalk.green('Part 2:')} %d`, part2Data.length);
+console.log('Part 1: %d', part1Data.length);
+console.log('Part 2: %d', part2Data.length);

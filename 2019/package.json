@@ -10,9 +10,6 @@
     "day3": "yarn run-day ./day3.ts",
     "day4": "yarn run-day ./day4.ts"
   },
-  "dependencies": {
-    "chalk": "^3.0.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/node": "^7.7.4",

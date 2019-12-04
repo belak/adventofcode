@@ -1,7 +1,5 @@
 import fs from 'fs';
 
-import chalk from 'chalk';
-
 const lines = fs
   .readFileSync('input/day1')
   .toString()
@@ -25,5 +23,5 @@ const recursiveTotal = recursiveCosts.reduce(
   (total, current) => total + current
 );
 
-console.log(chalk.green('Total: ') + '%d', modulesTotal);
-console.log(chalk.green('Recursive Total: ') + '%d', recursiveTotal);
+console.log('Total: %d', modulesTotal);
+console.log('Recursive Total: %d', recursiveTotal);

@@ -1,7 +1,5 @@
 import fs from 'fs';
 
-import chalk from 'chalk';
-
 const items = fs
   .readFileSync('input/day2')
   .toString()
@@ -24,7 +22,7 @@ const processMul = (
   param1: number,
   param2: number,
   target: number
-  ) =>
+) =>
   data.map((item, index) =>
     index === target ? data[param1] * data[param2] : item
   );
@@ -53,12 +51,12 @@ const processOpCode = (data: number[], noun: number, verb: number) => {
   return -1;
 };
 
-console.log(`${chalk.green('Calc:')} %d`, processOpCode(items, 12, 2));
+console.log('Calc: %d', processOpCode(items, 12, 2));
 
 for (let i = 0; i <= 99; i++) {
   for (let j = 0; j <= 99; j++) {
     if (processOpCode(items, i, j) == 19690720) {
-      console.log(`${chalk.green('Answer:')} %d`, 100 * i + j);
+      console.log('Answer: %d', 100 * i + j);
     }
   }
 }

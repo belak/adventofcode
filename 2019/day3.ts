@@ -62,9 +62,10 @@ const part1 = Math.min(
   })
 );
 
-const intersectingVals = intersectingKeys.map((key) => points1.get(key) + points2.get(key));
+const intersectingVals = intersectingKeys.map(
+  (key) => points1.get(key) + points2.get(key)
+);
 const part2 = Math.min(...intersectingVals);
 
-console.log(`${chalk.green('Part 1:')} %d`, part1);
-console.log(`${chalk.green('Part 2:')} %d`, part2);
-
+console.log('Part 1: %d', part1);
+console.log('Part 2: %d', part2);
