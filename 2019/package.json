@@ -8,12 +8,14 @@
     "day1": "yarn run-day ./day1.ts",
     "day2": "yarn run-day ./day2.ts",
     "day3": "yarn run-day ./day3.ts",
-    "day4": "yarn run-day ./day4.ts"
+    "day4": "yarn run-day ./day4.ts",
+    "day5": "yarn run-day ./day5.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/node": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
-    "@babel/preset-typescript": "^7.7.4"
+    "@babel/preset-typescript": "^7.7.4",
+    "@types/node": "^12.12.14"
   }
 }
