@@ -47,13 +47,12 @@ const generateMap = (input: string[][]): BodyMap => {
   }, {} as BodyMap);
 
   return Object.keys(parentMap).reduce((total, val) => {
-    return {
-      ...total,
-      [val]: {
-        ...total[val],
-        path: calculatePath(val, total),
-      },
+    total[val] = {
+      parent: total[val].parent,
+      path: calculatePath(val, total),
     };
+
+    return total;
   }, parentMap);
 };
 
