@@ -9,67 +9,58 @@ const items = fs
   .split(',')
   .map((x: string) => +x);
 
-const processAdd = (state: State, params: number[]): State => ({
-  ...state,
+const processAdd = (state: State, params: number[]): Partial<State> => ({
   mem: state.mem.map((item, index) =>
     index === params[2] ? params[0] + params[1] : item
   ),
   ptr: state.ptr + 4,
 });
 
-const processMul = (state: State, params: number[]): State => ({
-  ...state,
+const processMul = (state: State, params: number[]): Partial<State> => ({
   mem: state.mem.map((item, index) =>
     index === params[2] ? params[0] * params[1] : item
   ),
   ptr: state.ptr + 4,
 });
 
-const processInp = (state: State, params: number[]): State => ({
-  ...state,
+const processInp = (state: State, params: number[]): Partial<State> => ({
   mem: state.mem.map((item, index) =>
     index === params[0] ? state.input : item
   ),
   ptr: state.ptr + 2,
 });
 
-const processOut = (state: State, params: number[]): State => {
+const processOut = (state: State, params: number[]): Partial<State> => {
   console.log('Out:', params[0]);
 
   return {
-    ...state,
     ptr: state.ptr + 2,
   };
 };
 
-const processJT = (state: State, params: number[]): State => ({
-  ...state,
+const processJT = (state: State, params: number[]): Partial<State> => ({
   ptr: params[0] !== 0 ? params[1] : state.ptr + 3,
 });
 
-const processJF = (state: State, params: number[]): State => ({
-  ...state,
+const processJF = (state: State, params: number[]): Partial<State> => ({
   ptr: params[0] === 0 ? params[1] : state.ptr + 3,
 });
 
-const processLT = (state: State, params: number[]): State => ({
-  ...state,
+const processLT = (state: State, params: number[]): Partial<State> => ({
   mem: state.mem.map((item, index) =>
     index === params[2] ? (params[0] < params[1] ? 1 : 0) : item
   ),
   ptr: state.ptr + 4,
 });
 
-const processEq = (state: State, params: number[]): State => ({
-  ...state,
+const processEq = (state: State, params: number[]): Partial<State> => ({
   mem: state.mem.map((item, index) =>
     index === params[2] ? (params[0] === params[1] ? 1 : 0) : item
   ),
   ptr: state.ptr + 4,
 });
 
-const processDone = (state: State, params: number[]): State => ({
-  ...state,
+const processDone = (state: State, params: number[]): Partial<State> => ({
   mem: [],
   ptr: -1,
   done: true,
@@ -88,7 +79,7 @@ function genericParamMapper(mode: string, data: number[], v: number) {
 
 const immediateParamMapper: ParamMapper = (mode, data, v) => v;
 
-type OpCallback = (state: State, params: number[]) => State;
+type OpCallback = (state: State, params: number[]) => Partial<State>;
 type ParamMapper = (mode: string, data: number[], v: number) => number;
 
 type State = {
@@ -161,7 +152,10 @@ const processOpCode = (data: number[], input: number) => {
     );
 
     // console.log(opCode, params);
-    state = cb(state, params);
+    state = {
+      ...state,
+      ...cb(state, params),
+    };
     // console.log('Ptr:', ptr)
   }
 
