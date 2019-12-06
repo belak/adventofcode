@@ -1,18 +1,18 @@
 import fs from 'fs';
 
-const lines = fs
+const lines: number[] = fs
   .readFileSync('input/day1')
   .toString()
   .trim()
   .split('\n')
-  .map((x) => +x);
+  .map((x: string) => +x);
 
 // Calculate the gas cost for a single item
-const calculate = (x: number) => Math.max(0, Math.floor(x / 3) - 2);
+const calculate = (x: number): number => Math.max(0, Math.floor(x / 3) - 2);
 
 // Given an initial gas cost, calculate the cost of the gas for this gas. Note
 // that this assumes the gas will be passed in and not the module weight.
-const recursiveCalculate = (x: number) =>
+const recursiveCalculate = (x: number): number =>
   x === 0 ? x : x + recursiveCalculate(calculate(x));
 
 const moduleCosts = lines.map(calculate);

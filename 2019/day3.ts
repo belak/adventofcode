@@ -1,8 +1,6 @@
 import fs from 'fs';
 
-import chalk from 'chalk';
-
-const lines = fs
+const lines: string[][] = fs
   .readFileSync('input/day3')
   .toString()
   .trim()
@@ -63,7 +61,7 @@ const part1 = Math.min(
 );
 
 const intersectingVals = intersectingKeys.map(
-  (key) => points1.get(key) + points2.get(key)
+  (key) => points1.get(key)! + points2.get(key)!
 );
 const part2 = Math.min(...intersectingVals);
 

@@ -1,7 +1,5 @@
 import fs from 'fs';
 
-import chalk from 'chalk';
-
 const lines = fs
   .readFileSync('input/day4')
   .toString()

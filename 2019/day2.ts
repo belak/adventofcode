@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const items = fs
+const items: number[] = fs
   .readFileSync('input/day2')
   .toString()
   .trim()
