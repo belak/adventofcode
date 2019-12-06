@@ -21,8 +21,13 @@ const calculatePath = (body: string, map: BodyMap): string[] => {
   let curNode = map[body];
 
   while (map[curNode.parent]) {
-    path.push(curNode.parent);
-    curNode = map[curNode.parent];
+    if (map[curNode.parent].path.length) {
+      path.push(curNode.parent, ...map[curNode.parent].path);
+      break;
+    } else {
+      path.push(curNode.parent);
+      curNode = map[curNode.parent];
+    }
   }
 
   return path;
