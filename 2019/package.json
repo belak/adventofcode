@@ -10,7 +10,8 @@
     "day3": "yarn run-day ./day3.ts",
     "day4": "yarn run-day ./day4.ts",
     "day5": "yarn run-day ./day5.ts",
-    "day6": "yarn run-day ./day6.ts"
+    "day6": "yarn run-day ./day6.ts",
+    "day7": "yarn run-day ./day7.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
