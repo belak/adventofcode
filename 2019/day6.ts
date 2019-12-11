@@ -1,4 +1,6 @@
-import fs from 'fs';
+import { readItems } from './lib/utils';
+
+const items = readItems('input/day6').map((x: string) => x.split(')'));
 
 type BodyMap = {
   [key: string]: BodyInfo;
@@ -8,13 +10,6 @@ type BodyInfo = {
   parent: string;
   path: string[];
 };
-
-const items = fs
-  .readFileSync('input/day6')
-  .toString()
-  .trim()
-  .split('\n')
-  .map((x: string) => x.split(')'));
 
 const calculatePath = (body: string, map: BodyMap): string[] => {
   let path = [];

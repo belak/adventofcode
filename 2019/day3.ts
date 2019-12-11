@@ -1,11 +1,8 @@
-import fs from 'fs';
+import { range, readItems } from './lib/utils';
 
-const lines: string[][] = fs
-  .readFileSync('input/day3')
-  .toString()
-  .trim()
-  .split('\n')
-  .map((x: string) => x.split(','));
+const lines: string[][] = readItems('input/day3').map((x: string) =>
+  x.split(',')
+);
 
 type direction = 'L' | 'R' | 'U' | 'D';
 
@@ -14,8 +11,6 @@ const line2 = lines[1];
 
 const DX = { L: -1, R: 1, U: 0, D: 0 };
 const DY = { L: 0, R: 0, U: 1, D: -1 };
-
-const range = (n: number): number[] => [...Array(n).keys()];
 
 const getPoints = (ops: string[]) => {
   const points = new Map<string, number>();

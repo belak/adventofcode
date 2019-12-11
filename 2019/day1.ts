@@ -1,11 +1,6 @@
-import fs from 'fs';
+import { readNumberList } from './lib/utils';
 
-const lines: number[] = fs
-  .readFileSync('input/day1')
-  .toString()
-  .trim()
-  .split('\n')
-  .map((x: string) => +x);
+const lines: number[] = readNumberList('input/day1', '\n');
 
 // Calculate the gas cost for a single item
 const calculate = (x: number): number => Math.max(0, Math.floor(x / 3) - 2);

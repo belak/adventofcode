@@ -1,18 +1,12 @@
-import fs from 'fs';
+import { readItems, range } from './lib/utils';
 
-const lines: string[] = fs
-  .readFileSync('input/day10')
-  .toString()
-  .trim()
-  .split('\n');
+const lines: string[] = readItems('input/day10');
 
 const width = lines[0].length;
 const height = lines.length;
 
 type Slope = number;
 type Point = { x: number; y: number; dist: number };
-
-const range = (n: number): number[] => [...Array(n).keys()];
 
 const calc = (
   rawMap: string[],
@@ -96,7 +90,7 @@ while (finalMap.size > 0) {
       return;
     }
 
-    destroyedPoints.push(data.shift());
+    destroyedPoints.push(data.shift()!);
     if (data.length === 0) {
       finalMap.delete(key);
     } else {

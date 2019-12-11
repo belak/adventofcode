@@ -1,11 +1,6 @@
-import fs from 'fs';
+import { readNumberList } from './lib/utils';
 
-const items: number[] = fs
-  .readFileSync('input/day8')
-  .toString()
-  .trim()
-  .split('')
-  .map((x: string) => +x);
+const items: number[] = readNumberList('input/day8', '');
 
 const chunk = <T>(array: T[], size: number) => {
   const chunked_arr = [];

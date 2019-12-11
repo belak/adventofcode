@@ -1,17 +1,9 @@
-import fs from 'fs';
+import { readItems, range } from './lib/utils';
 
-const lines = fs
-  .readFileSync('input/day4')
-  .toString()
-  .trim()
-  .split('-');
-
-const range = (n: number): number[] => [...Array(n).keys()];
+const lines = readItems('input/day4', '-');
 
 const rangeLow = +lines[0];
 const rangeHigh = +lines[1];
-
-// "thanks i hate it - jsvana"
 
 // Match ascending numbers
 const rule1Matcher = /^0*1*2*3*4*5*6*7*8*9*$/;
