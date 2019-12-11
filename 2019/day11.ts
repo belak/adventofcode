@@ -2,25 +2,25 @@ import fs from 'fs';
 
 // Originally based on day9
 
-const items: BigInt[] = fs
+const items: bigint[] = fs
   .readFileSync('input/day11')
   .toString()
   .trim()
   .split(',')
   .map((x: string) => BigInt(x));
 
-type OpCallback = (state: State, params: BigInt[]) => void;
-type ParamMapper = (state: State, mode: string, v: BigInt) => BigInt;
+type OpCallback = (state: State, params: bigint[]) => void;
+type ParamMapper = (state: State, mode: string, v: bigint) => bigint;
 
 type Color = 'white' | 'black';
 
 type State = {
   // Program related
-  mem: Map<BigInt, BigInt>;
-  ptr: BigInt;
+  mem: Map<bigint, bigint>;
+  ptr: bigint;
   halted: boolean;
-  out: BigInt;
-  relativeBase: BigInt;
+  out: bigint;
+  relativeBase: bigint;
 
   // Paint related
   outState: 'color' | 'dir';
@@ -29,13 +29,13 @@ type State = {
   panels: Map<string, Color>;
 };
 
-const newState = (data: BigInt[], panels: Map<string, Color>): State => ({
+const newState = (data: bigint[], panels: Map<string, Color>): State => ({
   ptr: BigInt(0),
   out: BigInt(-1),
   halted: false,
   mem: data.reduce(
     (mem, val, idx) => mem.set(BigInt(idx), val),
-    new Map<BigInt, BigInt>()
+    new Map<bigint, bigint>()
   ),
   relativeBase: BigInt(0),
 
@@ -62,27 +62,27 @@ const nextDir = (cur: number, dir: number): number => {
   return cur + dirChange;
 };
 
-const range = (start: BigInt, end: BigInt): BigInt[] =>
+const range = (start: bigint, end: bigint): bigint[] =>
   [...Array(Number(end - start)).keys()].map((x) => BigInt(x) + start);
 
-const processAdd = (state: State, params: BigInt[]) => {
+const processAdd = (state: State, params: bigint[]) => {
   state.mem.set(params[2], params[0] + params[1]);
   state.ptr += BigInt(4);
 };
 
-const processMul = (state: State, params: BigInt[]) => {
+const processMul = (state: State, params: bigint[]) => {
   state.mem.set(params[2], params[0] * params[1]);
   state.ptr += BigInt(4);
 };
 
-const processInp = (state: State, params: BigInt[]) => {
+const processInp = (state: State, params: bigint[]) => {
   const curColor = state.panels.get(`${state.pos.x},${state.pos.y}`) || 'black';
   const input = curColor === 'black' ? BigInt(0) : BigInt(1);
   state.mem.set(params[0], input);
   state.ptr += BigInt(2);
 };
 
-const processOut = (state: State, params: BigInt[]) => {
+const processOut = (state: State, params: bigint[]) => {
   switch (state.outState) {
     case 'color':
       const color = params[0] === BigInt(0) ? 'black' : 'white';
@@ -103,36 +103,36 @@ const processOut = (state: State, params: BigInt[]) => {
   state.ptr += BigInt(2);
 };
 
-const processJT = (state: State, params: BigInt[]) => {
+const processJT = (state: State, params: bigint[]) => {
   state.ptr = params[0] !== BigInt(0) ? params[1] : state.ptr + BigInt(3);
 };
 
-const processJF = (state: State, params: BigInt[]) => {
+const processJF = (state: State, params: bigint[]) => {
   state.ptr = params[0] === BigInt(0) ? params[1] : state.ptr + BigInt(3);
 };
 
-const processLT = (state: State, params: BigInt[]) => {
+const processLT = (state: State, params: bigint[]) => {
   state.mem.set(params[2], params[0] < params[1] ? BigInt(1) : BigInt(0));
   state.ptr += BigInt(4);
 };
 
-const processEq = (state: State, params: BigInt[]) => {
+const processEq = (state: State, params: bigint[]) => {
   state.mem.set(params[2], params[0] === params[1] ? BigInt(1) : BigInt(0));
   state.ptr += BigInt(4);
 };
 
-const processRel = (state: State, params: BigInt[]) => {
+const processRel = (state: State, params: bigint[]) => {
   state.relativeBase += params[0];
   state.ptr += BigInt(2);
 };
 
-const processDone = (state: State, params: BigInt[]) => {
+const processDone = (state: State, params: bigint[]) => {
   state.mem = new Map();
   state.ptr = BigInt(-1);
   state.halted = true;
 };
 
-function inputParamMapper(state: State, mode: string, v: BigInt): BigInt {
+function inputParamMapper(state: State, mode: string, v: bigint): bigint {
   switch (mode) {
     case '0':
       return state.mem.get(v) || BigInt(0);
@@ -145,7 +145,7 @@ function inputParamMapper(state: State, mode: string, v: BigInt): BigInt {
   throw new Error(`Unknown input param mode: ${mode}`);
 }
 
-function targetParamMapper(state: State, mode: string, v: BigInt): BigInt {
+function targetParamMapper(state: State, mode: string, v: bigint): bigint {
   switch (mode) {
     case '0':
       return v;
@@ -222,7 +222,7 @@ const processSingleOpCode = (state: State) => {
   opCallback(state, params);
 };
 
-const processProgram = (data: BigInt[], panels: Map<string, Color>) => {
+const processProgram = (data: bigint[], panels: Map<string, Color>) => {
   let state: State = newState(data, panels);
 
   while (!state.halted) {
