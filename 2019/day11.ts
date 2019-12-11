@@ -30,14 +30,14 @@ type State = {
 };
 
 const newState = (data: bigint[], panels: Map<string, Color>): State => ({
-  ptr: BigInt(0),
-  out: BigInt(-1),
+  ptr: 0n,
+  out: -1n,
   halted: false,
   mem: data.reduce(
     (mem, val, idx) => mem.set(BigInt(idx), val),
     new Map<bigint, bigint>()
   ),
-  relativeBase: BigInt(0),
+  relativeBase: 0n,
 
   outState: 'color',
   dir: 0,
@@ -67,25 +67,25 @@ const range = (start: bigint, end: bigint): bigint[] =>
 
 const processAdd = (state: State, params: bigint[]) => {
   state.mem.set(params[2], params[0] + params[1]);
-  state.ptr += BigInt(4);
+  state.ptr += 4n;
 };
 
 const processMul = (state: State, params: bigint[]) => {
   state.mem.set(params[2], params[0] * params[1]);
-  state.ptr += BigInt(4);
+  state.ptr += 4n;
 };
 
 const processInp = (state: State, params: bigint[]) => {
   const curColor = state.panels.get(`${state.pos.x},${state.pos.y}`) || 'black';
-  const input = curColor === 'black' ? BigInt(0) : BigInt(1);
+  const input = curColor === 'black' ? 0n : 1n;
   state.mem.set(params[0], input);
-  state.ptr += BigInt(2);
+  state.ptr += 2n;
 };
 
 const processOut = (state: State, params: bigint[]) => {
   switch (state.outState) {
     case 'color':
-      const color = params[0] === BigInt(0) ? 'black' : 'white';
+      const color = params[0] === 0n ? 'black' : 'white';
       state.panels.set(`${state.pos.x},${state.pos.y}`, color);
       state.outState = 'dir';
       break;
@@ -100,46 +100,46 @@ const processOut = (state: State, params: bigint[]) => {
   }
 
   state.out = params[0];
-  state.ptr += BigInt(2);
+  state.ptr += 2n;
 };
 
 const processJT = (state: State, params: bigint[]) => {
-  state.ptr = params[0] !== BigInt(0) ? params[1] : state.ptr + BigInt(3);
+  state.ptr = params[0] !== 0n ? params[1] : state.ptr + 3n;
 };
 
 const processJF = (state: State, params: bigint[]) => {
-  state.ptr = params[0] === BigInt(0) ? params[1] : state.ptr + BigInt(3);
+  state.ptr = params[0] === 0n ? params[1] : state.ptr + 3n;
 };
 
 const processLT = (state: State, params: bigint[]) => {
-  state.mem.set(params[2], params[0] < params[1] ? BigInt(1) : BigInt(0));
-  state.ptr += BigInt(4);
+  state.mem.set(params[2], params[0] < params[1] ? 1n : 0n);
+  state.ptr += 4n;
 };
 
 const processEq = (state: State, params: bigint[]) => {
-  state.mem.set(params[2], params[0] === params[1] ? BigInt(1) : BigInt(0));
-  state.ptr += BigInt(4);
+  state.mem.set(params[2], params[0] === params[1] ? 1n : 0n);
+  state.ptr += 4n;
 };
 
 const processRel = (state: State, params: bigint[]) => {
   state.relativeBase += params[0];
-  state.ptr += BigInt(2);
+  state.ptr += 2n;
 };
 
 const processDone = (state: State, params: bigint[]) => {
   state.mem = new Map();
-  state.ptr = BigInt(-1);
+  state.ptr = -1n;
   state.halted = true;
 };
 
 function inputParamMapper(state: State, mode: string, v: bigint): bigint {
   switch (mode) {
     case '0':
-      return state.mem.get(v) || BigInt(0);
+      return state.mem.get(v) || 0n;
     case '1':
       return v;
     case '2':
-      return state.mem.get(state.relativeBase + v) || BigInt(0);
+      return state.mem.get(state.relativeBase + v) || 0n;
   }
 
   throw new Error(`Unknown input param mode: ${mode}`);
@@ -191,9 +191,9 @@ const processSingleOpCode = (state: State) => {
   const paramCount = paramMappers.length;
   const paramModes = rawParamModes.padEnd(paramCount, '0');
   const rawParams = range(
-    state.ptr + BigInt(1),
-    state.ptr + BigInt(1) + BigInt(paramCount)
-  ).map((val) => state.mem.get(val) || BigInt(0));
+    state.ptr + 1n,
+    state.ptr + 1n + BigInt(paramCount)
+  ).map((val) => state.mem.get(val) || 0n);
 
   const params = paramMappers.map((cb, i) =>
     cb(state, paramModes[i], rawParams[i])
@@ -210,11 +210,11 @@ const processSingleOpCode = (state: State) => {
   console.log('params:', params);
   console.log(
     'range:',
-    range(state.ptr + BigInt(1), state.ptr + BigInt(1) + BigInt(paramCount))
+    range(state.ptr + 1n, state.ptr + 1n + BigInt(paramCount))
   );
   console.log(
-    state.ptr + BigInt(1),
-    state.ptr + BigInt(1) + BigInt(paramCount)
+    state.ptr + 1n,
+    state.ptr + 1n + BigInt(paramCount)
   );
   console.log('---');
   //*/
