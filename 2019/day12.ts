@@ -83,38 +83,30 @@ console.log('Part 1:', part1);
 
 let xSolved = false;
 let xCycles = 0;
-
-let state = deepCopy(items);
-while (!xSolved) {
-  xCycles++;
-  step(state);
-  xSolved = state.every(
-    (pt, idx) => pt.x === items[idx].x && pt.dx === items[idx].dx
-  );
-}
-
 let ySolved = false;
 let yCycles = 0;
-
-state = deepCopy(items);
-while (!ySolved) {
-  yCycles++;
-  step(state);
-  ySolved = state.every(
-    (pt, idx) => pt.y === items[idx].y && pt.dy === items[idx].dy
-  );
-}
-
 let zSolved = false;
 let zCycles = 0;
 
-state = deepCopy(items);
-while (!zSolved) {
-  zCycles++;
+let state = deepCopy(items);
+while (!(xSolved && ySolved && zSolved)) {
+  if (!xSolved) xCycles++;
+  if (!ySolved) yCycles++;
+  if (!zSolved) zCycles++;
+
   step(state);
-  zSolved = state.every(
-    (pt, idx) => pt.z === items[idx].z && pt.dz === items[idx].dz
-  );
+
+  xSolved =
+    xSolved ||
+    state.every((pt, idx) => pt.x === items[idx].x && pt.dx === items[idx].dx);
+
+  ySolved =
+    ySolved ||
+    state.every((pt, idx) => pt.y === items[idx].y && pt.dy === items[idx].dy);
+
+  zSolved =
+    zSolved ||
+    state.every((pt, idx) => pt.z === items[idx].z && pt.dz === items[idx].dz);
 }
 
 console.log('Part 2:', [xCycles, yCycles, zCycles].reduce(lcm));
