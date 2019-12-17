@@ -43,6 +43,9 @@ const lcm = (a: number, b: number): number => (a * b) / gcd(a, b);
 
 const deepCopy = <T>(val: T): T => JSON.parse(JSON.stringify(val));
 
+const zip = <T, V>(one: T[], two: V[]): [T, V][] =>
+  one.map((x, idx) => [x, two[idx]]);
+
 export {
   readItems,
   readNumberList,
@@ -52,5 +55,6 @@ export {
   pairs,
   gcd,
   lcm,
+  zip,
   deepCopy,
 };

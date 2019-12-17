@@ -18,7 +18,8 @@
     "day11": "yarn run-day ./day11.ts",
     "day12": "yarn run-day ./day12.ts",
     "day13": "yarn run-day ./day13.ts",
-    "day14": "yarn run-day ./day14.ts"
+    "day14": "yarn run-day ./day14.ts",
+    "day16": "yarn run-day ./day16.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
