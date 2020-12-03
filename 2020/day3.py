@@ -2,9 +2,6 @@ lines = open("day3-input").read().splitlines()
 
 
 def slope(data, dx=3, dy=1):
-    x = 0
-    y = 0
-
     count = 0
 
     for i in range(len(data) // dy):

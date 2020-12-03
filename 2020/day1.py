@@ -1,6 +1,6 @@
 lines = [
     int(line)
-    for line in open('input').read().splitlines()
+    for line in open('day1-input').read().splitlines()
 ]
 
 def compute(lines):

@@ -15,7 +15,10 @@
     (filter
      (fn [line]
        (let [letter-count (get (frequencies (nth line 3)) (nth line 2))]
-         (and letter-count (<= (nth line 0) letter-count) (>= (nth line 1) letter-count))))
+         (and
+          letter-count
+          (<= (nth line 0) letter-count)
+          (>= (nth line 1) letter-count))))
      lines)))
 
   ;; Part 2
