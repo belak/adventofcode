@@ -3,8 +3,6 @@ lines = [
     for line in open("day6-input").read().split('\n\n')
 ]
 
-print(lines)
-
 
 def part1(data):
     total = 0
