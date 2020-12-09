@@ -1,6 +1,3 @@
-from aoc.asm import State
-
-
 lines = [
     int(line)
     for line in open("day9-input").read().splitlines()
@@ -17,15 +14,13 @@ def check_number(window, num):
 
 
 def part1(data):
-    idx_start = 0
-    idx_end = 25
+    idx = 0
     for item in data[25:]:
-        window = data[idx_start:idx_end]
+        window = data[idx:idx+25]
         if not check_number(window, item):
             return item
 
-        idx_start += 1
-        idx_end += 1
+        idx += 1
 
     return -1
 
