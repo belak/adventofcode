@@ -20,11 +20,15 @@ for i in range(len(lines)):
         data[(i, j)] = lines[i][j]
 
 
-part2_offsets = {}
 max_coord = (0, 0)
 for key in data.keys():
+    if key[0] > max_coord[0] or key[1] > max_coord[1]:
+        max_coord = key
+
+part2_offsets = {}
+for key in data.keys():
     for offset in offsets:
-        for i in range(1, 1000):
+        for i in range(1, max(max_coord)+1):
             coord = (key[0] + i * offset[0], key[1] + i * offset[1])
             seat = data.get(coord, '')
 
@@ -34,9 +38,6 @@ for key in data.keys():
             if seat == '#' or seat == 'L':
                 part2_offsets[(key, offset)] = coord
                 break
-
-    if key[0] > max_coord[0] or key[1] > max_coord[1]:
-        max_coord = coord
 
 
 class State:
