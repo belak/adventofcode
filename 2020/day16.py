@@ -21,32 +21,37 @@ def is_valid(limit, value):
 def value_error_rate(limits, value):
     for limit in limits.values():
         if is_valid(limit, value):
-            return 0
+            return None
 
     return value
 
 
 def ticket_error_rate(limits, ticket):
+    errored = False
     error_rate = 0
     for value in ticket:
-        error_rate += value_error_rate(limits, value)
+        tmp = value_error_rate(limits, value)
+        if tmp is None:
+            continue
+
+        errored = True
+        error_rate += tmp
+
+    if not errored:
+        return None
+
     return error_rate
 
 
 def part1(limits, my_ticket, nearby):
     error_rate = 0
 
-    count = 0
-
     for ticket in nearby:
         tmp = ticket_error_rate(limits, ticket)
-        if tmp == 0:
-            count += 1
+        if tmp is None:
+            tmp = 0
 
-        error_rate += ticket_error_rate(limits, ticket)
-
-    print(len(nearby))
-    print(count)
+        error_rate += tmp
 
     return error_rate
 
@@ -55,10 +60,8 @@ def part2(limits, my_ticket, nearby):
     # Filter out any ticket with an error rate of > 0
     nearby = [
         ticket for ticket in nearby
-        if ticket_error_rate(limits, ticket) == 0
+        if ticket_error_rate(limits, ticket) is None
     ]
-
-    print(len(nearby))
 
     # Start with an empty possible set for all positions
     leftover_limits = [set() for x in my_ticket]
@@ -83,11 +86,8 @@ def part2(limits, my_ticket, nearby):
                 leftover_limits[i].add(key)
 
     limit_keys = {}
-    #print(leftover_limits)
 
     while True:
-        print(leftover_limits)
-
         changed = False
         tmp = []
 
@@ -99,8 +99,7 @@ def part2(limits, my_ticket, nearby):
                 limit_keys[key] = i
                 tmp += [key]
                 changed = True
-
-        print('Removing', tmp)
+                #print('Found', key, 'in index', i)
 
         for item in leftover_limits:
             for limit in tmp:
@@ -108,10 +107,6 @@ def part2(limits, my_ticket, nearby):
 
         if not changed:
             break
-
-    print(leftover_limits)
-
-    print(limit_keys)
 
     ret = 1
     for key, loc in limit_keys.items():
