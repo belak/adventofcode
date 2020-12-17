@@ -85,14 +85,15 @@ class State:
 
     def dump(self):
         print(f"gen={self.gen}")
-        for z in range(self.min[2], self.max[2] + 1):
-            print(f"z={z}")
-            for y in range(self.min[1], self.max[1] + 1):
-                for x in range(self.min[0], self.max[0] + 1):
-                    pos = Point(x, y, z)
-                    print(self.state[pos], end='')
+        for w in range(self.min[3], self.max[3] + 1):
+            for z in range(self.min[2], self.max[2] + 1):
+                print(f"z={z}, w={w}")
+                for y in range(self.min[1], self.max[1] + 1):
+                    for x in range(self.min[0], self.max[0] + 1):
+                        pos = Point(x, y, z, w)
+                        print(self.state[pos], end='')
+                    print()
                 print()
-            print()
 
     def count_active(self):
         total = 0
