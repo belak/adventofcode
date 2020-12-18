@@ -4,3 +4,4 @@ input-*
 node_modules
 .vscode
 target
+.python-version
