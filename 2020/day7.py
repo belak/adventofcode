@@ -4,15 +4,17 @@ def get_input():
     ret = {}
 
     for item in data:
-        key, inner = item.removesuffix('.').split(" bags contain ")
+        key, inner = item.removesuffix(".").split(" bags contain ")
 
         ret[key] = {}
 
-        if 'no other' in inner:
+        if "no other" in inner:
             continue
 
-        for bag in inner.split(', '):
-            count, name = bag.removesuffix('s').removesuffix(' bag').split(' ', maxsplit=1)
+        for bag in inner.split(", "):
+            count, name = (
+                bag.removesuffix("s").removesuffix(" bag").split(" ", maxsplit=1)
+            )
             ret[key][name] = int(count)
 
     return ret
@@ -22,7 +24,7 @@ lines = get_input()
 
 
 def handle_bags(data):
-    cur_set = set(['shiny gold'])
+    cur_set = set(["shiny gold"])
     last_len = -1
 
     while True:
@@ -36,7 +38,7 @@ def handle_bags(data):
                 if search in val:
                     cur_set.add(key)
 
-    cur_set.remove('shiny gold')
+    cur_set.remove("shiny gold")
 
     return cur_set
 
@@ -58,7 +60,7 @@ def part1(data):
 
 
 def part2(data):
-    return calculate_depth(data, 'shiny gold') - 1
+    return calculate_depth(data, "shiny gold") - 1
 
 
 print(part1(lines))

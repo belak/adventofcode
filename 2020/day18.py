@@ -1,13 +1,17 @@
 data = [
-    line.split(' ')
-    for line in open("day18-input").read().replace('(', '( ').replace(')', ' )').splitlines()
+    line.split(" ")
+    for line in open("day18-input")
+    .read()
+    .replace("(", "( ")
+    .replace(")", " )")
+    .splitlines()
 ]
 
 
 class Calculator:
     OPS = {
-        '+': lambda x, y: x + y,
-        '*': lambda x, y: x * y,
+        "+": lambda x, y: x + y,
+        "*": lambda x, y: x * y,
     }
 
     def __init__(self, data, mode=1):
@@ -16,7 +20,7 @@ class Calculator:
 
     def parse_value(self, data):
         item, rest = data[0], data[1:]
-        if item == '(':
+        if item == "(":
             expr, rest = self.split_inner_expr(rest)
             return self.parse_expr(expr), rest
         else:
@@ -27,16 +31,15 @@ class Calculator:
         i = 0
         for item in line:
             i += 1
-            if item == '(':
+            if item == "(":
                 depth += 1
-            elif item == ')':
+            elif item == ")":
                 depth -= 1
 
             if depth == 0:
-                return line[:i-1], line[i:]
+                return line[: i - 1], line[i:]
 
-        raise Exception('mismatched parens')
-
+        raise Exception("mismatched parens")
 
     def parse_expr(self, data):
         # Start by flattening out this array - calculate any nested parens as a value.
@@ -49,9 +52,9 @@ class Calculator:
         rest = tmp
 
         if self.mode == 1:
-            precidence = ['+*']
+            precidence = ["+*"]
         else:
-            precidence = ['+', '*']
+            precidence = ["+", "*"]
 
         # Essentially, do a pass for each op set (in order of precidence) to
         # reduce the array. When we get to the end, we should have 1 element
@@ -62,13 +65,17 @@ class Calculator:
                 idx = (2 * i) + 1
                 op = rest[idx]
                 if op in valid_ops:
-                    rest = rest[:idx-1] + [Calculator.OPS[op](rest[idx-1], rest[idx + 1])] + rest[idx+2:]
+                    rest = (
+                        rest[: idx - 1]
+                        + [Calculator.OPS[op](rest[idx - 1], rest[idx + 1])]
+                        + rest[idx + 2 :]
+                    )
                 else:
                     i += 1
 
         if len(rest) != 1:
             print(rest)
-            raise Exception('failed to reduce equation')
+            raise Exception("failed to reduce equation")
 
         return rest[0]
 
@@ -84,5 +91,5 @@ def part2(data):
     return sum([Calculator(line, 2).run() for line in data])
 
 
-print('part1:', part1(data))
-print('part2:', part2(data))
+print("part1:", part1(data))
+print("part2:", part2(data))

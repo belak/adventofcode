@@ -1,10 +1,7 @@
 from aoc.asm import State
 
 
-lines = [
-    line.split(' ', maxsplit=2)
-    for line in open("day8-input").read().splitlines()
-]
+lines = [line.split(" ", maxsplit=2) for line in open("day8-input").read().splitlines()]
 
 
 def part1(data):
@@ -23,7 +20,7 @@ def part2(data):
 
         state = State(tmp)
         ok, acc = state.run()
-        if ok == 'ok':
+        if ok == "ok":
             return acc
 
     return None

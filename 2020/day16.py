@@ -1,11 +1,11 @@
-data = open("day16-input").read().split('\n\n')
+data = open("day16-input").read().split("\n\n")
 limits = {}
-my_ticket = list(map(int, data[1].splitlines()[1].split(',')))
-nearby = [list(map(int, line.split(','))) for line in data[2].splitlines()[1:]]
+my_ticket = list(map(int, data[1].splitlines()[1].split(",")))
+nearby = [list(map(int, line.split(","))) for line in data[2].splitlines()[1:]]
 
 for limit in data[0].splitlines():
-    name, desc = limit.split(': ')
-    limits[name] = list(map(lambda x: list(map(int, x.split('-'))), desc.split(' or ')))
+    name, desc = limit.split(": ")
+    limits[name] = list(map(lambda x: list(map(int, x.split("-"))), desc.split(" or ")))
 
 
 def is_valid(limit, value):
@@ -58,10 +58,7 @@ def part1(limits, my_ticket, nearby):
 
 def part2(limits, my_ticket, nearby):
     # Filter out any ticket with an error rate of > 0
-    nearby = [
-        ticket for ticket in nearby
-        if ticket_error_rate(limits, ticket) is None
-    ]
+    nearby = [ticket for ticket in nearby if ticket_error_rate(limits, ticket) is None]
 
     # Start with an empty possible set for all positions
     leftover_limits = [set() for x in my_ticket]
@@ -99,7 +96,7 @@ def part2(limits, my_ticket, nearby):
                 limit_keys[key] = i
                 tmp += [key]
                 changed = True
-                #print('Found', key, 'in index', i)
+                # print('Found', key, 'in index', i)
 
         for item in leftover_limits:
             for limit in tmp:
@@ -110,7 +107,7 @@ def part2(limits, my_ticket, nearby):
 
     ret = 1
     for key, loc in limit_keys.items():
-        if not key.startswith('departure'):
+        if not key.startswith("departure"):
             continue
 
         ret *= my_ticket[loc]
@@ -118,5 +115,5 @@ def part2(limits, my_ticket, nearby):
     return ret
 
 
-print('part1:', part1(limits, my_ticket, nearby))
-print('part2:', part2(limits, my_ticket, nearby))
+print("part1:", part1(limits, my_ticket, nearby))
+print("part2:", part2(limits, my_ticket, nearby))

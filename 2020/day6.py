@@ -1,7 +1,4 @@
-lines = [
-    line.splitlines()
-    for line in open("day6-input").read().split('\n\n')
-]
+lines = [line.splitlines() for line in open("day6-input").read().split("\n\n")]
 
 
 def part1(data):

@@ -1,7 +1,4 @@
-lines = [
-    int(line)
-    for line in open("day9-input").read().splitlines()
-]
+lines = [int(line) for line in open("day9-input").read().splitlines()]
 
 
 def check_number(window, num):
@@ -16,7 +13,7 @@ def check_number(window, num):
 def part1(data):
     idx = 0
     for item in data[25:]:
-        window = data[idx:idx+25]
+        window = data[idx : idx + 25]
         if not check_number(window, item):
             return item
 

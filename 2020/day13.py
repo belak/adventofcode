@@ -4,10 +4,7 @@ from functools import reduce
 lines = open("day13-input").read().splitlines()
 
 target = int(lines[0])
-lines = [
-    int(line) if line != 'x' else -1
-    for line in lines[1].split(',')
-]
+lines = [int(line) if line != "x" else -1 for line in lines[1].split(",")]
 
 
 def part1(target, data):
@@ -63,7 +60,7 @@ def part2(target, data):
         # ```
         for i in count(1):
             if (cur + (i * step) + offset) % val == 0:
-                cur += (i * step)
+                cur += i * step
                 break
 
         # My first attempt used cur and step as the same value, but this isn't
@@ -81,6 +78,5 @@ def part2(target, data):
     return cur
 
 
-print('part1:', part1(target, list(filter(lambda x: x != -1, lines))))
-print('part2:', part2(target, lines))
-
+print("part1:", part1(target, list(filter(lambda x: x != -1, lines))))
+print("part2:", part2(target, lines))

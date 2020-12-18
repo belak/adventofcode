@@ -1,7 +1,4 @@
-lines = [
-    [line[:-3], line[-3:]]
-    for line in open("day5-input").read().splitlines()
-]
+lines = [[line[:-3], line[-3:]] for line in open("day5-input").read().splitlines()]
 
 
 def get_ids(data):
@@ -14,12 +11,12 @@ def get_ids(data):
 
         for char in item[0]:
             size /= 2
-            if char == 'F':
+            if char == "F":
                 high_row -= size
-            elif char == 'B':
+            elif char == "B":
                 low_row += size
             else:
-                raise Error('invalid char')
+                raise Error("invalid char")
 
         assert low_row == high_row
 
@@ -29,16 +26,16 @@ def get_ids(data):
 
         for char in item[1]:
             size /= 2
-            if char == 'R':
+            if char == "R":
                 low_seat += size
-            elif char == 'L':
+            elif char == "L":
                 high_seat -= size
             else:
-                raise Error('invalid char')
+                raise Error("invalid char")
 
         assert low_seat == high_seat
 
-        #print(low_row, low_seat)
+        # print(low_row, low_seat)
         board_id = low_row * 8 + low_seat
 
         ret.append(board_id)

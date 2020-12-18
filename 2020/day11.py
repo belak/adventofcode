@@ -28,14 +28,14 @@ for key in data.keys():
 part2_offsets = {}
 for key in data.keys():
     for offset in offsets:
-        for i in range(1, max(max_coord)+1):
+        for i in range(1, max(max_coord) + 1):
             coord = (key[0] + i * offset[0], key[1] + i * offset[1])
-            seat = data.get(coord, '')
+            seat = data.get(coord, "")
 
-            if seat == '':
+            if seat == "":
                 break
 
-            if seat == '#' or seat == 'L':
+            if seat == "#" or seat == "L":
                 part2_offsets[(key, offset)] = coord
                 break
 
@@ -60,22 +60,22 @@ class State:
                 if coord is None:
                     continue
 
-                if self.prev.get(coord, '') == '#':
+                if self.prev.get(coord, "") == "#":
                     occupied += 1
 
-            cur_seat = self.cur.get(key, '')
-            if cur_seat == '#':
+            cur_seat = self.cur.get(key, "")
+            if cur_seat == "#":
                 if occupied >= occupied_threshold:
-                    self.cur[key] = 'L'
+                    self.cur[key] = "L"
                     changed = True
-            elif cur_seat == 'L':
+            elif cur_seat == "L":
                 if occupied == 0:
-                    self.cur[key] = '#'
+                    self.cur[key] = "#"
                     changed = True
-            elif cur_seat == '.':
+            elif cur_seat == ".":
                 pass
             else:
-                raise Exception(f'unknown value: {cur_seat}')
+                raise Exception(f"unknown value: {cur_seat}")
 
         return changed
 
@@ -94,15 +94,15 @@ class State:
 
     def print(self):
         print(max_coord)
-        for j in range(max_coord[0]+1):
-            for i in range(max_coord[1]+1):
-                print(self.cur[(j, i)], end='')
+        for j in range(max_coord[0] + 1):
+            for i in range(max_coord[1] + 1):
+                print(self.cur[(j, i)], end="")
             print()
 
     def occupied(self):
         occupied = 0
         for val in self.cur.values():
-            if val == '#':
+            if val == "#":
                 occupied += 1
 
         return occupied
@@ -121,10 +121,10 @@ def part2(data):
     state = State(data)
 
     while state.step2():
-       pass
+        pass
 
     return (state.gen, state.occupied())
 
 
-print('part1:', part1(data))
-print('part2:', part2(data))
+print("part1:", part1(data))
+print("part2:", part2(data))

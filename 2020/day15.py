@@ -1,4 +1,4 @@
-data = list(map(int, open("day15-input").read().split(',')))
+data = list(map(int, open("day15-input").read().split(",")))
 
 
 def calculate(data, target):
@@ -37,5 +37,5 @@ def part2(data):
     return calculate(data, 30000000)
 
 
-print('part1:', part1(data))
-print('part2:', part2(data))
+print("part1:", part1(data))
+print("part2:", part2(data))

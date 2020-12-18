@@ -3,11 +3,11 @@ from copy import copy
 
 data = open("day17-input").read().splitlines()
 
-ACTIVE = '#'
-INACTIVE = '.'
+ACTIVE = "#"
+INACTIVE = "."
 
 
-Point = namedtuple('Point', ['x', 'y', 'z', 'w'])
+Point = namedtuple("Point", ["x", "y", "z", "w"])
 
 offsets = []
 for i in [-1, 0, 1]:
@@ -59,7 +59,7 @@ class State:
 
     def step(self):
         self.gen += 1
-        print(f'step gen {self.gen}')
+        print(f"step gen {self.gen}")
 
         prev_state = copy(self.state)
 
@@ -69,7 +69,9 @@ class State:
                     for x in range(self.min[0] - 1, self.max[0] + 2):
                         num_alive = 0
                         for offset in offsets:
-                            pos = Point(x + offset.x, y + offset.y, z + offset.z, w + offset.w)
+                            pos = Point(
+                                x + offset.x, y + offset.y, z + offset.z, w + offset.w
+                            )
                             if prev_state[pos] == ACTIVE:
                                 num_alive += 1
                         cur = Point(x, y, z, w)
@@ -82,7 +84,6 @@ class State:
                                 self.update_max(cur.x, cur.y, cur.z, cur.w)
                                 self.update_min(cur.x, cur.y, cur.z, cur.w)
 
-
     def dump(self):
         print(f"gen={self.gen}")
         for w in range(self.min[3], self.max[3] + 1):
@@ -91,7 +92,7 @@ class State:
                 for y in range(self.min[1], self.max[1] + 1):
                     for x in range(self.min[0], self.max[0] + 1):
                         pos = Point(x, y, z, w)
-                        print(self.state[pos], end='')
+                        print(self.state[pos], end="")
                     print()
                 print()
 
@@ -110,4 +111,4 @@ def part2(initial_state):
     return state.count_active()
 
 
-print('part2:', part2(data))
+print("part2:", part2(data))
