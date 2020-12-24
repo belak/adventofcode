@@ -26,6 +26,22 @@ class Point:
     def __add__(self, other):
         return Point(self.x + other.x, self.y + other.y)
 
+#          _____
+#         /  NW \
+#   _____/ -1,1  \_____
+#  /  W  \       /  NE \
+# / -1,0  \_____/  0,1 \
+# \       /     \       /
+#  \_____/  0,0  \_____/
+#  /  SW \       /  E  \
+# / 0, -1 \_____/  1,0  \
+# \       /  SE \       /
+#  \_____/ 1, -1 \_____/
+#        \       /
+#         \_____/
+
+# It's confusing, but a hexagon grid is still a grid. Because of this, we can
+# define all the offsets from the origin and use that for directions.
 
 OFFSETS = {
     "e": Point(1, 0),
