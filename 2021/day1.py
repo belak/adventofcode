@@ -20,13 +20,10 @@ prev = None
 increasing = 0
 
 for i in range(len(data) - window_size + 1):
-    cur = data[i: i + window_size]
+    cur = sum(data[i: i + window_size])
 
     if prev is not None:
-        cur_sum = sum(cur)
-        prev_sum = sum(prev)
-
-        if cur_sum > prev_sum:
+        if cur > prev:
             increasing += 1
 
     prev = cur
