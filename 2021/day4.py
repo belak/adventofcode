@@ -15,8 +15,8 @@ def mark_number(boards, number):
     complete = []
     incomplete = []
 
-    for idx in range(len(boards)):
-        board = numpy.where(boards[idx] == number, 0, boards[idx])
+    for board in boards:
+        board = numpy.where(board == number, 0, board)
 
         if board_complete(board):
             complete.append(board)
