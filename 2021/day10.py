@@ -21,26 +21,7 @@ matches = {
     '<': '>',
 }
 
-def check_line(line, idx=0, expected_stack=None):
-    if expected_stack is None:
-        expected_stack = []
-
-    if len(line) == 0:
-        return
-
-    next_char, rest = line[0], line[1:]
-
-    if next_char in matches:
-        expected_stack.append(matches[next_char])
-        return check_line(rest, idx+1, expected_stack)
-    else:
-        expected = expected_stack.pop()
-        if next_char == expected:
-            return check_line(rest, idx+1, expected_stack)
-        else:
-            return idx
-
-def check_line_part2(line):
+def check_line(line):
     line = list(line)
     expected_stack = []
     unmatched = []
@@ -57,7 +38,7 @@ def check_line_part2(line):
             if next_char == expected:
                 break
 
-            unmatched.append(expected)
+            return (point_lookup[next_char], 0)
 
     while len(expected_stack) > 0:
         expected = expected_stack.pop()
@@ -66,20 +47,18 @@ def check_line_part2(line):
     total = 0
     for m in unmatched:
         total = total * 5 + part2_point_lookup[m]
-    return total
+
+    return 0, total
 
 
 total = 0
 scores = []
 for line in data:
-    idx = check_line(line)
-    if idx is not None:
-        total += point_lookup[line[idx]]
-    else:
-        scores.append(check_line_part2(line))
+    part1, part2 = check_line(line)
+    total += part1
+    scores.append(part2)
 
-
+scores = list(sorted(filter(lambda x: x > 0, scores)))
 
 print(total)
-scores.sort()
 print(scores[len(scores) // 2])
