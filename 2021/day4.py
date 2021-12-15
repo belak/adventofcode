@@ -2,7 +2,7 @@ import numpy
 
 from adventlib import load_sections
 
-data = load_sections
+data = load_sections("day4-input")
 
 numbers = map(int, data[0].split(","))
 boards = [

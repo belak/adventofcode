@@ -1,6 +1,6 @@
 import networkx as nx
 
-from adventlib import split_lines, load_lines
+from adventlib import load_lines
 
 data = load_lines("day12-input", lambda l: l.split("-"))
 
