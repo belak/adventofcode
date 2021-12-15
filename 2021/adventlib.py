@@ -44,7 +44,7 @@ def truncate_arr(arr, max_x, max_y):
 
 
 def parse_2d_grid(data):
-    data = [str_to_ints(line) for line in data.splitlines()]
+    data = [concrete_map(line) for line in data.splitlines()]
     return np.array(data)
 
 
@@ -77,5 +77,5 @@ def load_list(filename, sep=",", cast=int):
         return list(map(cast, f.read().split(sep)))
 
 
-def str_to_ints(data):
-    return list(map(int, data))
+def concrete_map(data, cast=int):
+    return list(map(cast, data))
