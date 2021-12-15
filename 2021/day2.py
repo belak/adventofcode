@@ -1,7 +1,7 @@
 from adventlib import load_lines
 
 
-data = [line.split() for line in load_lines("day2-input")]
+data = load_lines("day2-input", lambda l: l.split())
 data = [(line[0], int(line[1])) for line in data]
 
 depth = 0

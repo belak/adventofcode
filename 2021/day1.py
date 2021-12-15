@@ -1,7 +1,7 @@
 from adventlib import load_lines
 
 
-data = [int(line) for line in load_lines("day1-input")]
+data = load_lines("day1-input", int)
 
 prev = None
 increasing = 0

@@ -54,9 +54,14 @@ def load_2d_grid(filename):
         return parse_2d_grid(data)
 
 
-def load_lines(filename):
+def load_lines(filename, cast=None):
     with open(filename) as f:
-        return f.read().splitlines()
+        data = f.read().splitlines()
+
+        if cast is not None:
+            data = [cast(line) for line in data]
+
+        return data
 
 
 def load_sections(filename):

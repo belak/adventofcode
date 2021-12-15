@@ -2,7 +2,7 @@ from numpy import sign  # why is this not in the stdlib
 
 from adventlib import load_lines, split_lines
 
-data = split_lines(load_lines("day5-input"), sep=" -> ")
+data = load_lines("day5-input", lambda l: l.split(" -> "))
 data = [[elem.split(",") for elem in item] for item in data]
 data = [[list(map(int, elem)) for elem in item] for item in data]
 

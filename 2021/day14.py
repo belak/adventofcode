@@ -4,7 +4,8 @@ from adventlib import load_lines, split_lines
 
 data = load_lines("day14-input")
 template = data[0]
-data = {line[0]: line[1] for line in split_lines(data[2:], sep=" -> ")}
+data = split_lines(data[2:], sep=" -> ")
+data = {line[0]: line[1] for line in data}
 
 
 doubles = Counter(template[i : i + 2] for i in range(len(template) - 1))
