@@ -10,8 +10,10 @@ boards = [
     for board in data[1:]
 ]
 
+
 def board_complete(board):
     return 0 in board.sum(axis=0) or 0 in board.sum(axis=1)
+
 
 def mark_number(boards, number):
     complete = []
@@ -26,6 +28,7 @@ def mark_number(boards, number):
             incomplete.append(board)
 
     return complete, incomplete
+
 
 # NOTE: We really want the scores of completed boards - the first one is part 1,
 # the last one is part 2.

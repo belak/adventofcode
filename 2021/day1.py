@@ -23,7 +23,7 @@ prev = None
 increasing = 0
 
 for i in range(len(data) - window_size + 1):
-    cur = sum(data[i: i + window_size])
+    cur = sum(data[i : i + window_size])
 
     if prev is not None:
         if cur > prev:
@@ -32,4 +32,3 @@ for i in range(len(data) - window_size + 1):
     prev = cur
 
 print(increasing)
-

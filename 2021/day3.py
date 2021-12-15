@@ -17,31 +17,33 @@ epsilon = ""
 gamma = ""
 
 for i in combined:
-    #print(i)
-    if i.get('0', 0) > i.get('1', 0):
-        epsilon += '0'
-        gamma += '1'
+    # print(i)
+    if i.get("0", 0) > i.get("1", 0):
+        epsilon += "0"
+        gamma += "1"
     else:
-        epsilon += '1'
-        gamma += '0'
+        epsilon += "1"
+        gamma += "0"
 
 print(int(epsilon, 2) * int(gamma, 2))
+
 
 def bit_frequency_in_pos(data, pos):
     one = 0
     zero = 0
     for line in data:
-        if line[pos] == '1':
+        if line[pos] == "1":
             one += 1
         else:
             zero += 1
 
     if one > zero:
-        return ('1', '0')
+        return ("1", "0")
     elif zero > one:
-        return ('0', '1')
+        return ("0", "1")
     else:
-        return ('1', '0')
+        return ("1", "0")
+
 
 oxygen_data = data.copy()
 i = 0

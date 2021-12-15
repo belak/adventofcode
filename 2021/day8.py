@@ -75,10 +75,16 @@ for patterns, output in data:
         filter(lambda x: len(x) == 5 and len(x.intersection(one)) == 2, patterns)
     )
     two = next(
-        filter(lambda x: len(x) == 5 and len(x.intersection(four)) == 2 and x != three, patterns)
+        filter(
+            lambda x: len(x) == 5 and len(x.intersection(four)) == 2 and x != three,
+            patterns,
+        )
     )
     five = next(
-        filter(lambda x: len(x) == 5 and len(x.intersection(four)) == 3 and x != three, patterns)
+        filter(
+            lambda x: len(x) == 5 and len(x.intersection(four)) == 3 and x != three,
+            patterns,
+        )
     )
 
     # Using the same method as above grouped by 6 segments.
@@ -91,10 +97,16 @@ for patterns, output in data:
         filter(lambda x: len(x) == 6 and len(x.intersection(one)) == 1, patterns)
     )
     nine = next(
-        filter(lambda x: len(x) == 6 and len(x.intersection(four)) == 4 and x != six, patterns)
+        filter(
+            lambda x: len(x) == 6 and len(x.intersection(four)) == 4 and x != six,
+            patterns,
+        )
     )
     zero = next(
-        filter(lambda x: len(x) == 6 and len(x.intersection(four)) == 3 and x != six, patterns)
+        filter(
+            lambda x: len(x) == 6 and len(x.intersection(four)) == 3 and x != six,
+            patterns,
+        )
     )
 
     str_count = len(

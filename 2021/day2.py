@@ -17,7 +17,7 @@ for (direction, amount) in data:
     else:
         raise Exception("unknown direction: %s" % direction)
 
-print(depth*pos)
+print(depth * pos)
 
 depth = 0
 pos = 0
@@ -26,7 +26,7 @@ aim = 0
 for (direction, amount) in data:
     if direction == "forward":
         pos += amount
-        depth += (aim * amount)
+        depth += aim * amount
     elif direction == "down":
         aim += amount
     elif direction == "up":
@@ -34,4 +34,4 @@ for (direction, amount) in data:
     else:
         raise Exception("unknown direction: %s" % direction)
 
-print(depth*pos)
+print(depth * pos)

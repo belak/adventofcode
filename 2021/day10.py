@@ -4,25 +4,26 @@ from adventlib import load_lines
 data = load_lines("day10-input")
 
 point_lookup = {
-    ')': 3,
-    ']': 57,
-    '}': 1197,
-    '>': 25137,
+    ")": 3,
+    "]": 57,
+    "}": 1197,
+    ">": 25137,
 }
 
 part2_point_lookup = {
-    ')': 1,
-    ']': 2,
-    '}': 3,
-    '>': 4,
+    ")": 1,
+    "]": 2,
+    "}": 3,
+    ">": 4,
 }
 
 matches = {
-    '{': '}',
-    '[': ']',
-    '(': ')',
-    '<': '>',
+    "{": "}",
+    "[": "]",
+    "(": ")",
+    "<": ">",
 }
+
 
 def check_line(line):
     line = list(line)
