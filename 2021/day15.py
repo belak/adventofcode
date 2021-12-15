@@ -1,12 +1,10 @@
 import networkx as nx
 from networkx.classes.function import path_weight
 
-from adventlib import CARDINAL_DIRS as dirs, load_2d_grid
-
-data = load_2d_grid("day15-input")
+from adventlib import CARDINAL_DIRS as dirs, parse_2d_grid, AOC
 
 
-def populate_grid(data, G=None, multiplier=1):
+def populate_grid(data, multiplier=1):
     G = nx.DiGraph()
     G.add_node("start")
     G.add_edge("start", (0, 0), weight=0)
@@ -47,10 +45,21 @@ def populate_grid(data, G=None, multiplier=1):
     return G
 
 
-G = populate_grid(data)
-path = nx.astar_path(G, "start", "end", weight="weight")
-print(path_weight(G, path, "weight"))
+class Day15(AOC):
+    def process_input(self, raw_data):
+        return parse_2d_grid(raw_data)
 
-G = populate_grid(data, G, multiplier=5)
-path = nx.astar_path(G, "start", "end", weight="weight")
-print(path_weight(G, path, "weight"))
+    def part1(self):
+        G = populate_grid(self.data)
+        path = nx.astar_path(G, "start", "end", weight="weight")
+        print(path_weight(G, path, "weight"))
+
+    def part2(self):
+        G = populate_grid(self.data, multiplier=5)
+        path = nx.astar_path(G, "start", "end", weight="weight")
+        print(path_weight(G, path, "weight"))
+
+
+if __name__ == '__main__':
+    aoc = Day15()
+    aoc.run()

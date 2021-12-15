@@ -1,3 +1,8 @@
+import time
+import inspect
+from pathlib import Path
+from contextlib import contextmanager
+
 import numpy as np
 
 
@@ -79,3 +84,55 @@ def load_list(filename, sep=",", cast=int):
 
 def concrete_map(data, cast=int):
     return list(map(cast, data))
+
+
+@contextmanager
+def timer(name):
+    start = time.time()
+    yield
+    end = time.time()
+    print(f"{name} took {end - start:.2f}s")
+
+
+class AOC:
+    def __init__(self):
+        if getattr(self, "input_filename", None) is None:
+            self.input_filename = (
+                Path(inspect.getfile(type(self))).with_suffix("").name + "-input"
+            )
+
+    def run(self):
+        self.load_input()
+        with timer("process_input"):
+            data = self.process_input(self.raw_data)
+            if data is not None:
+                self.data = data
+
+        with timer("part1"):
+            part1 = self.part1()
+            if part1 is not None:
+                print(part1)
+
+        with timer("part2"):
+            part2 = self.part2()
+            if part2 is not None:
+                print(part2)
+
+        self.finalize()
+
+    def load_input(self):
+        with open(self.input_filename) as f:
+            self.raw_data = f.read()
+
+    def process_input(self, raw_data):
+        return raw_data.splitlines()
+
+    # Overrides below here
+    def part1(self):
+        raise NotImplementedError
+
+    def part2(self):
+        raise NotImplementedError
+
+    def finalize(self):
+        pass
