@@ -27,7 +27,7 @@ ORDINAL_DIRS = [
 
 def print_arr(arr, max_x=float("inf"), max_y=float("inf")):
     """
-    Print a 2d array, using . for falsy values and # for truthy.
+    Print a 2d array, using space for falsy values and # for truthy.
 
     This also accepts optional max_x and max_y arguments to display only a
     portion of the array.
@@ -35,7 +35,7 @@ def print_arr(arr, max_x=float("inf"), max_y=float("inf")):
     coords = (min(max_x, len(arr[0])), min(max_y, len(arr)))
     for y in range(coords[1]):
         for x in range(coords[0]):
-            print("#" if arr[y, x] else ".", end="")
+            print("#" if arr[y, x] else " ", end="")
         print()
 
 
