@@ -1,4 +1,6 @@
-data = list(map(int, open("day6-input").read().split(',')))
+from adventlib import load_list
+
+data = load_list("day6-input")
 
 timers = [data.count(i) for i in range(9)]
 

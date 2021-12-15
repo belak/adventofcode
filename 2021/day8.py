@@ -1,4 +1,7 @@
-data = open("day8-input").read().splitlines()
+from adventlib import load_lines
+
+
+data = load_lines("day8-input")
 data = [line.split(" | ") for line in data]
 data = [list(map(lambda x: x.split(" "), line)) for line in data]
 

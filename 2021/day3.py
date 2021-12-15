@@ -1,4 +1,7 @@
-data = open('day3-input').read().splitlines()
+from adventlib import load_lines
+
+
+data = load_lines("day3-input")
 
 combined = []
 for _ in data[0]:

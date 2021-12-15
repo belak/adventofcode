@@ -1,8 +1,8 @@
 import numpy as np
 
-from adventlib import print_arr, truncate_arr
+from adventlib import load_sections, print_arr, truncate_arr
 
-data = open("day13-input").read().split("\n\n")
+data = load_sections("day13-input")
 data, folds = data[0], data[1]
 data = [list(map(int, line.split(","))) for line in data.splitlines()]
 folds = [line.removeprefix("fold along ") for line in folds.splitlines()]

@@ -1,4 +1,7 @@
-data = [int(line) for line in open('day1-input').read().splitlines()]
+from adventlib import load_lines
+
+
+data = [int(line) for line in load_lines("day1-input")]
 
 prev = None
 increasing = 0

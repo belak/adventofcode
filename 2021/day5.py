@@ -1,6 +1,8 @@
 from numpy import sign  # why is this not in the stdlib
 
-data = [line.split(" -> ") for line in open("day5-input").read().splitlines()]
+from adventlib import load_lines, split_lines
+
+data = split_lines(load_lines("day5-input"), sep=" -> ")
 data = [[elem.split(",") for elem in item] for item in data]
 data = [[list(map(int, elem)) for elem in item] for item in data]
 

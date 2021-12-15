@@ -1,18 +1,12 @@
 import networkx as nx
 from networkx.classes.function import path_weight
 
-data = open("day15-input").read().splitlines()
-data = [list(map(int, line)) for line in data]
+from adventlib import CARDINAL_DIRS as dirs, load_2d_grid
 
-dirs = [
-    (0, -1),
-    (0, 1),
-    (1, 0),
-    (-1, 0),
-]
+data = load_2d_grid("day15-input")
 
 
-def populate_grid(data, G=None, multiplier=1, skip_mult=0):
+def populate_grid(data, G=None, multiplier=1):
     G = nx.DiGraph()
     G.add_node("start")
     G.add_edge("start", (0, 0), weight=0)
@@ -57,6 +51,6 @@ G = populate_grid(data)
 path = nx.astar_path(G, "start", "end", weight="weight")
 print(path_weight(G, path, "weight"))
 
-G = populate_grid(data, G, multiplier=5, skip_mult=1)
+G = populate_grid(data, G, multiplier=5)
 path = nx.astar_path(G, "start", "end", weight="weight")
 print(path_weight(G, path, "weight"))

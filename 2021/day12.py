@@ -1,5 +1,8 @@
 import networkx as nx
 
+from adventlib import split_lines, load_lines
+
+data = split_lines(load_lines("day12-input"), sep="-")
 data = [line.split("-") for line in open("day12-input").read().splitlines()]
 
 G = nx.Graph()

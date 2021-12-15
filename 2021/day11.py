@@ -1,18 +1,8 @@
 import numpy as np
 
-dirs = [
-    (0, 1),
-    (0, -1),
-    (1, 0),
-    (1, -1),
-    (1, 1),
-    (-1, 0),
-    (-1, 1),
-    (-1, -1),
-]
+from adventlib import ORDINAL_DIRS as dirs, load_2d_grid
 
-data = open("day11-input").read().splitlines()
-data = np.array([list(map(int, line)) for line in data])
+data = load_2d_grid("day11-input")
 
 count = 0
 

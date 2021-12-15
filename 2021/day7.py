@@ -1,4 +1,7 @@
-data = list(map(int, open("day7-input").read().split(",")))
+from adventlib import load_list
+
+
+data = load_list("day7-input")
 
 min_crab = min(data)
 max_crab = max(data)

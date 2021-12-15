@@ -1,19 +1,12 @@
-data = open("day9-input").read().splitlines()
-data = [list(line) for line in data]
-data = [list(map(int, line)) for line in data]
+from adventlib import CARDINAL_DIRS as dirs, load_2d_grid
+
+data = load_2d_grid("day9-input")
 
 tmp = {}
 for y in range(len(data)):
     for x in range(len(data[y])):
         tmp[(x, y)] = data[y][x]
 data = tmp
-
-dirs = [
-    (1, 0),
-    (-1, 0),
-    (0, 1),
-    (0, -1),
-]
 
 low_sum = 0
 low_points = []

@@ -1,6 +1,8 @@
 import numpy
 
-data = open("day4-input").read().split("\n\n")
+from adventlib import load_sections
+
+data = load_sections
 
 numbers = map(int, data[0].split(","))
 boards = [

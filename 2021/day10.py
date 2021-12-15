@@ -1,4 +1,7 @@
-data = open("day10-input").read().splitlines()
+from adventlib import load_lines
+
+
+data = load_lines("day10-input")
 
 point_lookup = {
     ')': 3,

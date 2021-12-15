@@ -1,6 +1,25 @@
 import numpy as np
 
 
+CARDINAL_DIRS = [
+    (0, -1),
+    (0, 1),
+    (1, 0),
+    (-1, 0),
+]
+
+ORDINAL_DIRS = [
+    (0, 1),
+    (0, -1),
+    (1, 0),
+    (1, -1),
+    (1, 1),
+    (-1, 0),
+    (-1, 1),
+    (-1, -1),
+]
+
+
 def print_arr(arr, max_x=float("inf"), max_y=float("inf")):
     """
     Print a 2d array, using . for falsy values and # for truthy.
@@ -22,3 +41,36 @@ def truncate_arr(arr, max_x, max_y):
     arr = np.delete(arr, list(range(max_y, len(arr))), axis=0)
     arr = np.delete(arr, list(range(max_x, len(arr[0]))), axis=1)
     return arr
+
+
+def parse_2d_grid(data):
+    data = [str_to_ints(line) for line in data.splitlines()]
+    return np.array(data)
+
+
+def load_2d_grid(filename):
+    with open(filename) as f:
+        data = f.read()
+        return parse_2d_grid(data)
+
+
+def load_lines(filename):
+    with open(filename) as f:
+        return f.read().splitlines()
+
+
+def load_sections(filename):
+    return load_list(filename, sep="\n\n")
+
+
+def split_lines(data, sep=","):
+    return [line.split(sep) for line in data]
+
+
+def load_list(filename, sep=",", cast=int):
+    with open(filename) as f:
+        return list(map(cast, f.read().split(sep)))
+
+
+def str_to_ints(data):
+    return list(map(int, data))
