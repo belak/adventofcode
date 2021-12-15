@@ -54,9 +54,9 @@ def populate_grid(data, G=None, multiplier=1, skip_mult=0):
 
 
 G = populate_grid(data)
-path = nx.shortest_path(G, "start", "end", "weight")
+path = nx.astar_path(G, "start", "end", weight="weight")
 print(path_weight(G, path, "weight"))
 
 G = populate_grid(data, G, multiplier=5, skip_mult=1)
-path = nx.shortest_path(G, "start", "end", "weight")
+path = nx.astar_path(G, "start", "end", weight="weight")
 print(path_weight(G, path, "weight"))
