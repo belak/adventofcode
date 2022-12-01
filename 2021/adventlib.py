@@ -25,6 +25,11 @@ ORDINAL_DIRS = [
 ]
 
 
+def split_chunks(l, n):
+    for i in range(0, len(l), n):
+        yield l[i:i + n]
+
+
 def print_arr(arr, max_x=float("inf"), max_y=float("inf")):
     """
     Print a 2d array, using space for falsy values and # for truthy.
