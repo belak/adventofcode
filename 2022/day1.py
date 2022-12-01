@@ -1,9 +1,10 @@
 from adventlib import AOC
 
+
 class Day1(AOC):
     def process_input(self, raw_data):
-        elves = raw_data.split('\n\n')
-        elves = [[int(line) for line in elf.strip().split('\n')] for elf in elves]
+        elves = raw_data.split("\n\n")
+        elves = [[int(line) for line in elf.strip().split("\n")] for elf in elves]
         return elves
 
     def part1(self):
@@ -14,6 +15,6 @@ class Day1(AOC):
         return vals[-1] + vals[-2] + vals[-3]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     aoc = Day1()
     aoc.run()
