@@ -127,7 +127,7 @@ class AOC:
 
     def load_input(self):
         with open(self.input_filename) as f:
-            self.raw_data = f.read()
+            self.raw_data = f.read().strip('\n')
 
     def process_input(self, raw_data):
         return raw_data.splitlines()
