@@ -27,7 +27,7 @@ ORDINAL_DIRS = [
 
 def split_chunks(l, n):
     for i in range(0, len(l), n):
-        yield l[i:i + n]
+        yield l[i : i + n]
 
 
 def print_arr(arr, max_x=float("inf"), max_y=float("inf")):
@@ -91,6 +91,11 @@ def concrete_map(data, cast=int):
     return list(map(cast, data))
 
 
+def window(data, n):
+    for i in range(len(data) - n + 1):
+        yield data[i : i + n]
+
+
 @contextmanager
 def timer(name):
     start = time.time()
@@ -127,7 +132,7 @@ class AOC:
 
     def load_input(self):
         with open(self.input_filename) as f:
-            self.raw_data = f.read().strip('\n')
+            self.raw_data = f.read().strip("\n")
 
     def process_input(self, raw_data):
         return raw_data.splitlines()
