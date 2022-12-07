@@ -1,3 +1,4 @@
+from copy import deepcopy
 import time
 import inspect
 from pathlib import Path
@@ -116,14 +117,16 @@ class AOC:
         with timer("process_input"):
             data = self.process_input(self.raw_data)
             if data is not None:
-                self.data = data
+                self.raw_data = data
 
         with timer("part1"):
+            self.data = deepcopy(self.raw_data)
             part1 = self.part1()
             if part1 is not None:
                 print(part1)
 
         with timer("part2"):
+            self.data = deepcopy(self.raw_data)
             part2 = self.part2()
             if part2 is not None:
                 print(part2)
