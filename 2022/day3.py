@@ -9,6 +9,9 @@ def item_val(item):
 
 
 class Day3(AOC):
+    def process_input(self, raw_data):
+        return raw_data.splitlines()
+
     def part1(self):
         total = 0
         for line in self.data:
