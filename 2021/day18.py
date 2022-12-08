@@ -1,4 +1,5 @@
 from math import floor, ceil
+from copy import deepcopy
 
 from adventlib import AOC
 
@@ -12,7 +13,7 @@ class Node:
         if isinstance(self.val, int):
             return self.val
 
-        return 3 * self.val[0] + 2 * self.val[1]
+        return 3 * self.val[0].magnitude() + 2 * self.val[1].magnitude()
 
     def set_depth(self, depth):
         self.depth = depth
@@ -49,7 +50,11 @@ def try_explode(nodes):
                 break
             continue
 
-        if node.depth > 4 and all(map(lambda x: isinstance(x.val, int), node.val)):
+        if (
+            target is None
+            and node.depth > 4
+            and all(map(lambda x: isinstance(x.val, int), node.val))
+        ):
             target = node
 
     if target is None:
@@ -89,28 +94,44 @@ class Day18(AOC):
     def part1(self):
         final = self.data[0]
         for line in self.data[1:]:
-            print("have", final)
-            print("adding", line)
             node = Node([final, line])
             node.set_depth(1)
 
             while True:
                 if try_explode(node):
-                    print("after exp: ", node)
                     continue
                 if try_split(node):
-                    print("after spl: ", node)
                     continue
                 break
 
             final = node
 
-        print(final)
-
         return final.magnitude()
 
     def part2(self):
-        pass
+        final_sum = 0
+
+        # Essentially, do a cartesian product of all the data and try adding
+        # each together.
+        for x in range(len(self.data)):
+            for y in range(len(self.data)):
+                # Probably unnecessary optimization.
+                if x == y:
+                    continue
+
+                node = Node([deepcopy(self.data[x]), deepcopy(self.data[y])])
+                node.set_depth(1)
+
+                while True:
+                    if try_explode(node):
+                        continue
+                    if try_split(node):
+                        continue
+                    break
+
+                final_sum = max(final_sum, node.magnitude())
+
+        return final_sum
 
 
 if __name__ == "__main__":
