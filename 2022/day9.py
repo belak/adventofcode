@@ -3,6 +3,14 @@ from collections import defaultdict
 from adventlib import AOC
 
 
+DIRECTIONS = {
+     "U": (0, 1),
+     "R": (1, 0),
+     "D": (0, -1),
+     "L": (-1, 0),
+}
+
+
 def move_tail(head, tail):
     if abs(head[0] - tail[0]) <= 1 and abs(head[1] - tail[1]) <= 1:
         return tail
@@ -37,19 +45,7 @@ class Day9(AOC):
 
         for (d, amount) in self.data:
             amount = int(amount)
-
-            if d == "U":
-                dx = 0
-                dy = 1
-            elif d == "R":
-                dx = 1
-                dy = 0
-            elif d == "D":
-                dx = 0
-                dy = -1
-            elif d == "L":
-                dx = -1
-                dy = 0
+            (dx, dy) = DIRECTIONS[d]
 
             for i in range(1, amount + 1):
                 head = (prev_head[0] + dx * i, prev_head[1] + dy * i)
@@ -64,7 +60,7 @@ class Day9(AOC):
         grid = defaultdict(lambda: ".")
         prev_head = head = (0, 0)
 
-        # Make a tail of 9 elements - the head plus the 9.
+        # Make a tail of 9 elements - the head plus the 9 makes 10.
         tail = [(0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)]
 
         # Mark the starting point as visited
@@ -72,19 +68,7 @@ class Day9(AOC):
 
         for (d, amount) in self.data:
             amount = int(amount)
-
-            if d == "U":
-                dx = 0
-                dy = 1
-            elif d == "R":
-                dx = 1
-                dy = 0
-            elif d == "D":
-                dx = 0
-                dy = -1
-            elif d == "L":
-                dx = -1
-                dy = 0
+            (dx, dy) = DIRECTIONS[d]
 
             for i in range(1, amount + 1):
                 head = target = (prev_head[0] + dx * i, prev_head[1] + dy * i)
