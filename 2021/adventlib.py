@@ -26,6 +26,36 @@ ORDINAL_DIRS = [
 ]
 
 
+def print_map(data):
+    min_x = min(map(lambda pt: pt[0], data.keys()))
+    min_y = min(map(lambda pt: pt[1], data.keys()))
+    max_x = max(map(lambda pt: pt[0], data.keys()))
+    max_y = max(map(lambda pt: pt[1], data.keys()))
+
+    print('({}, {}) to ({}, {})'.format(min_x, max_y, max_x, min_y))
+
+    for y in range(max_y, min_y-1, -1):
+        for x in range(min_x, max_x+1):
+            print(data[(x, y)], end='')
+        print()
+
+def straight_line_points(start, end):
+    if start[0] == end[0]:
+        for i in range(
+            start[1], end[1], int(abs(end[1] - start[1]) / (end[1] - start[1]))
+        ):
+            yield (start[0], i)
+        yield end
+    elif start[1] == end[1]:
+        for i in range(
+            start[0], end[0], int(abs(end[0] - start[0]) / (end[0] - start[0]))
+        ):
+            yield (i, start[1])
+        yield end
+    else:
+        raise Exception("not a straight line")
+
+
 def split_chunks(l, n):
     for i in range(0, len(l), n):
         yield l[i : i + n]
