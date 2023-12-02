@@ -111,6 +111,6 @@ mod test {
     #[test]
     fn sample_data_part2() {
         let data = parse_data(PART2_SAMPLE_DATA);
-        assert_eq!(282, part2(&data));
+        assert_eq!(281, part2(&data));
     }
 }
