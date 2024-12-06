@@ -61,22 +61,21 @@ def patrol(data, x, y):
                 return None
             visited_with_dirs.add(target)
 
-
-print(len(patrol(data, start_x, start_y)))
+part1 = patrol(data, start_x, start_y)
+print(len(part1))
 
 total = 0
-for y in range(len(data)):
-    for x in range(len(data[1])):
-        if x == start_x and y == start_y:
-            continue
-        if data[y][x] == "#":
-            continue
+for (x, y) in part1:
+    if x == start_x and y == start_y:
+        continue
+    if data[y][x] == "#":
+        continue
 
-        data[y][x] = "#"
+    data[y][x] = "#"
 
-        if patrol(data, start_x, start_y) is None:
-            total += 1
+    if patrol(data, start_x, start_y) is None:
+        total += 1
 
-        data[y][x] = "."
+    data[y][x] = "."
 
 print(total)
