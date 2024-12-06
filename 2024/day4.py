@@ -57,13 +57,16 @@ for i in range(len(data)):
         if data[i][j] != "A":
             continue
 
-        try:
-            d1 = data[i - 1][j - 1] + data[i][j] + data[i + 1][j + 1]
-            d2 = data[i - 1][j + 1] + data[i][j] + data[i + 1][j - 1]
-            if d1 in allowed_diags and d2 in allowed_diags:
-                total2 += 1
-        except IndexError:
-            pass
+        if i == 0 or i == len(data) - 1:
+            continue
+
+        if j == 0 or j == len(data[i]) - 1:
+            continue
+
+        d1 = data[i - 1][j - 1] + data[i][j] + data[i + 1][j + 1]
+        d2 = data[i - 1][j + 1] + data[i][j] + data[i + 1][j - 1]
+        if d1 in allowed_diags and d2 in allowed_diags:
+            total2 += 1
 
 print(total)
 print(total2)
